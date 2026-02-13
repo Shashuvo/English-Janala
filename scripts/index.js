@@ -8,21 +8,39 @@ const loadLevelWord = (id) => {
     const url = `https://openapi.programming-hero.com/api/level/${id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => displayLevelWord(data.data));
+        .then(data => {
+            removeActive();
+            const clickBtn = document.getElementById(`lesson-btn-${id}`);
+            clickBtn.classList.add("active");
+            displayLevelWord(data.data)
+        });
+}
+
+const removeActive = () => {
+    const lessonButtons = document.querySelectorAll(".lesson-btn");
+    lessonButtons.forEach(btn => btn.classList.remove("active"));
 }
 
 const displayLevelWord = (words) => {
     const wordContainer = document.getElementById("word-container");
     wordContainer.innerHTML = "";
+    if (words.length == 0) {
+        wordContainer.innerHTML = `
+        <div class="text-center col-span-full font-bangla space-y-3 py-8 md:py-16">
+            <img class="mx-auto" src="./assets/alert-error.png" alt="Alert Image"/>
+            <h3 class="text-sm text-[#79716B]">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</h3>
+            <h1 class="text-xl md:text-4xl text-[#292524] font-medium">নেক্সট Lesson এ যান</h1>
+        </div>
+        `;
+    }
     words.forEach(word => {
-        console.log(word);
         const card = document.createElement("div");
         card.innerHTML = `
-        <div class="bg-white h-full rounded-xl text-center p-14 space-y-6">
-            <h1 class="text-3xl font-bold">${word.word}</h1>
+        <div class="bg-white h-full rounded-xl text-center p-7 md:p-14 space-y-6">
+            <h1 class="text-3xl font-bold">${word.word ? word.word : "শব্দ পাওয়া যায়নি"}</h1>
             <p class="text-xl font-medium">Meaning / Pronunciation</p>
-            <p class="text-3xl font-semibold font-bangla">"${word.meaning} / ${word.pronunciation}"</p>
-            <div class="flex justify-between mt-14">
+            <p class="text-2xl font-semibold font-bangla pb-14">"${word.meaning ? word.meaning : "অর্থ নেই"} / ${word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায়নি"}"</p>
+            <div class="flex justify-between">
                 <button class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-volume-high"></i></button>
             </div>
@@ -38,7 +56,7 @@ const displayLesson = (lessons) => {
     for (let lesson of lessons) {
         const btnDiv = document.createElement("div");
         btnDiv.innerHTML = `
-        <button onClick="loadLevelWord(${lesson.level_no})" class="group btn btn-outline text-[#422AD5] hover:bg-[#422AD5] hover:text-white">
+        <button id="lesson-btn-${lesson.level_no}" onClick="loadLevelWord(${lesson.level_no})" class="group btn btn-outline text-[#422AD5] hover:bg-[#422AD5] hover:text-white lesson-btn">
         <img class="transition duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter"
         src="./assets/fa-book-open.png" alt="FAQ logo">
         Learn-${lesson.level_no}</button>

@@ -1,3 +1,9 @@
+const createElement = (arr) => {
+    const htmlElements = arr.map(ele => `<button class="btn bg-[#EDF7FF] border-[#D7E4EF] text-md font-normal">${ele}</button>`);
+    return htmlElements.join(" ");
+}
+
+
 const loadLesson = () => {
     fetch("https://openapi.programming-hero.com/api/levels/all")
         .then(res => res.json())
@@ -16,9 +22,43 @@ const loadLevelWord = (id) => {
         });
 }
 
+const loadWordDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/word/${id}`;
+    const res = await fetch(url);
+    const details = await res.json();
+    displayWordDetails(details.data);
+}
+
 const removeActive = () => {
     const lessonButtons = document.querySelectorAll(".lesson-btn");
     lessonButtons.forEach(btn => btn.classList.remove("active"));
+}
+
+const displayWordDetails = (word) => {
+    console.log(word)
+    const detailsBox = document.getElementById("details-container");
+    detailsBox.innerHTML = `
+    <div class="space-y-6 rounded-2xl">
+    <div class="space-y-8 border-2 border-[#EDF7FF] rounded-2xl p-4 w-full">
+      <h1 class="text-2xl font-semibold">${word.word} (<i class="fa-solid fa-microphone-lines"></i> : ${word.pronunciation})</h1>
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">Meaning</h3>
+        <p class="text-lg font-medium font-bangla">${word.meaning}</p>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">Example</h3>
+        <p class="text-lg">${word.sentence}</p>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-lg font-medium font-bangla">সমার্থক শব্দ গুলো</h3>
+        <div class="flex gap-4">
+          ${createElement(word.synonyms)}
+        </div>
+      </div>
+    </div>
+  </div>
+    `;
+    document.getElementById("word_modal").showModal();
 }
 
 const displayLevelWord = (words) => {
@@ -41,7 +81,7 @@ const displayLevelWord = (words) => {
             <p class="text-xl font-medium">Meaning / Pronunciation</p>
             <p class="text-2xl font-semibold font-bangla pb-14">"${word.meaning ? word.meaning : "অর্থ নেই"} / ${word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায়নি"}"</p>
             <div class="flex justify-between">
-                <button class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-circle-info"></i></button>
+                <button onClick="loadWordDetails(${word.id})" class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>

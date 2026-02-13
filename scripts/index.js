@@ -3,6 +3,11 @@ const createElement = (arr) => {
     return htmlElements.join(" ");
 }
 
+function pronounceWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = "en-EN"; // English
+    window.speechSynthesis.speak(utterance);
+}
 
 const loadLesson = () => {
     fetch("https://openapi.programming-hero.com/api/levels/all")
@@ -94,8 +99,8 @@ const displayLevelWord = (words) => {
             <p class="text-xl font-medium">Meaning / Pronunciation</p>
             <p class="text-2xl font-semibold font-bangla pb-14">"${word.meaning ? word.meaning : "অর্থ নেই"} / ${word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায়নি"}"</p>
             <div class="flex justify-between">
-                <button onClick="loadWordDetails(${word.id})" class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-circle-info"></i></button>
-                <button class="btn bg-[#1A91FF]/10"><i class="fa-solid fa-volume-high"></i></button>
+                <button onClick="loadWordDetails(${word.id})" class="btn bg-[#1A91FF]/10 hover:bg-[#1A91FF]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onClick="pronounceWord('${word.word}')" class="btn bg-[#1A91FF]/10 hover:bg-[#1A91FF]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
     `;

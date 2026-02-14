@@ -3,7 +3,7 @@
 An interactive vocabulary learning web application built with HTML, Tailwind CSS, DaisyUI, and JavaScript.
 It uses API integration and DOM manipulation to provide a dynamic, responsive, and engaging learning experience.
 
-🌐 Live Site
+🌐 Live Site : https://english-janala-shuvo.netlify.app/
 
 🚀 Features
 

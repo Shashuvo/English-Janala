@@ -1,116 +1,102 @@
-# ENGLISH <img width="25px" src="./assets/logo.png" /> JANALA
+📘 English Janala
 
----
+An interactive vocabulary learning web application built with HTML, Tailwind CSS, DaisyUI, and JavaScript.
+It uses API integration and DOM manipulation to provide a dynamic, responsive, and engaging learning experience.
 
-## ⚡ API Endpoints
+🌐 Live Site
 
-1. Get ⚡ All Levels
+🚀 Features
 
-```bash
-https://openapi.programming-hero.com/api/levels/all
-```
+🎯 Dynamically generated lesson buttons from API
 
-1. Get ⚡ Words by Levels <br/>
-   https:// openapi.programming-hero.com/api/level/{id}
+📝 Load vocabulary words by level
 
-```bash
-https://openapi.programming-hero.com/api/level/5
-```
+📖 Word details modal with pronunciation, example sentence, and synonyms
 
-1. Get ⚡ Words Detail <br/>
-   https:// openapi.programming-hero.com/api/word/{id}
+🎨 Active lesson button highlighting
 
-```bash
-https://openapi.programming-hero.com/api/word/5
-```
+🔍 Search functionality
 
-1. Get ⚡ All Words <br/>
+💖 Save words feature (Favorites)
 
-```bash
-https://openapi.programming-hero.com/api/words/all
-```
+🔊 Voice pronunciation using SpeechSynthesis API
 
-# Work To do
+⏳ Loading spinner during API fetch
 
-### 1. Show Levels on The UI
+✅ Handles null/undefined data gracefully
 
-- [ ] Show a center-aligned heading as Figma
+📱 Fully responsive design
 
----
+⚡ API Endpoints
+Purpose	Endpoint
+Get All Levels	https://openapi.programming-hero.com/api/levels/all
+Get Words by Level	https://openapi.programming-hero.com/api/level/{id}
+Get Word Details	https://openapi.programming-hero.com/api/word/{id}
+Get All Words	https://openapi.programming-hero.com/api/words/all
+🛠️ Technologies Used
 
-- [ ] Create dynamically generated buttons from **API-01** for each lesson
-- [ ] Lesson Buttons will be displayed on page load
+HTML5 – Structure & Layout
 
----
+Tailwind CSS – Utility-first styling
 
-### 2. Show Word Cards Based on Level
+DaisyUI – Pre-designed components
 
-- [ ] Show a default text that will be displayed in the Vocabulary section initially
-- [ ] on Clicking a Specific Lesson Button Load All the words from **API-02**
-- [ ] Display all words for a selected lesson in a card format, showing:
+JavaScript – DOM manipulation & dynamic functionality
 
-  - [ ] Word
-  - [ ] Word meaning & pronunciation
-  - [ ] Two buttons with relevant icons as per Figma
+SpeechSynthesis API – Voice pronunciation
 
-- [ ] Show **\*No Word Found** message if no words exist for a lesson
+🎯 Functionalities
+Lesson Section
 
----
+Dynamically loads lesson buttons
 
-- [ ] Create functionality to highlight the active lesson button
+Highlights the active lesson
 
----
+Loads words for selected lessons
 
-### 3. Use Different Color on The Active Level Button
+Vocabulary Section
 
-- [ ] After Successfully Loading words of a level , diffirentiate the button so user can understand which button is active
+Displays words in card format
 
-### 4. Vocabulary Details
+Default text shown initially
 
-- [ ] Create functionality to open a modal when clicking the details icon
-- [ ] Data will be load from **API-03**
-- [ ] modal will displays:
-  - [ ] Word with pronunciation
-  - [ ] Example sentence
-  - [ ] Synonyms
-  - [ ] A "Complete Learning" button to close the modal
+Shows “No Word Found” if lesson has no words
 
-### 5. Handling Invalid Data
+Word Details Modal
 
-- [ ] avoid displaying falsy values like `undefined` or `null`
-- [ ] display relevant words if no data is found
+Word with pronunciation
 
-### 6. Loading Spinner
+Example sentence
 
-- [ ] Create a loading spinner that will be display when vocabulary is loading from API
+Synonyms
 
-### 7. Implement Search Functionality
+Close button ("Complete Learning")
 
-- [ ] Take a input Box.
-- [ ] on Changing value It will Search word and show in the UI.
-- [ ] If anyone Do search reset active button
+Search
 
-### 8. Save Word Feature
+Dynamic search for words
 
-- [ ] in the UI of Card add a button `Heart icon`
-- [ ] on Clicking it. Store the Word in the Saved Box
-- [ ] Show Saved words in a Different Section.
+Resets active lesson button on search
 
-### 9. Speak your Vocabularies
+Save Words
 
-- [ ] Create functionality for voice pronunciation of vocabulary words
-- [ ] Use below function and implement on clicking sound icon
+Save words with heart icon
 
-```js
+Saved words appear in a separate section
+
+Voice Pronunciation
 function pronounceWord(word) {
   const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = "en-EN"; // English
+  utterance.lang = "en-EN";
   window.speechSynthesis.speak(utterance);
 }
-```
 
-For More >> you can explore this implementation 👉 [https://codepen.io/Ferdous-Zihad/pen/PwoJMmJ](https://codepen.io/Ferdous-Zihad/pen/PwoJMmJ)
+📂 Project Purpose
 
----
-Bonus : How to create Private Repository for next assignments
-## Test Repo - :  https://classroom.github.com/a/Fgjib-lr
+Practice API integration and DOM manipulation
+
+Learn dynamic content rendering
+
+Implement responsive and modern UI with Tailwind CSS & DaisyUI
+
+Build a functional, interactive, and real-world JavaScript project

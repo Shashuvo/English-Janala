@@ -68,7 +68,7 @@ const displayWordDetails = (word) => {
       </div>
       <div class="space-y-2">
         <h3 class="text-lg font-medium font-bangla">সমার্থক শব্দ গুলো</h3>
-        <div class="flex gap-4">
+        <div class="flex flex-wrap gap-4">
           ${createElement(word.synonyms)}
         </div>
       </div>
